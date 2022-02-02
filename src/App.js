@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container, Row, Col } from "react-bootstrap";
+import { EthAndGasPrice } from "./components/ethAndGasPrice/EthAndGasPrice";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container fluid className="bg-dark pb-1 mb-5 d-flex justify-content-center align-content-center">
+        <h1 className="text-white mb-0">BootstrapBoard</h1>
+      </Container>
+
+      <EthAndGasPrice/>
+      
     </div>
   );
 }
