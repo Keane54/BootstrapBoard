@@ -72,7 +72,7 @@ export const EthAndGasPrice = () => {
     if (isLoading === true) {
         price = <h2>Loading...</h2>
     } else {
-        price = <h2>{isUSD === true ? `$${ethPrice.ethusd}` : `${ethPrice.ethbtc}₿`}</h2>
+        price = <h2> ETH Price: {isUSD === true ? `$${ethPrice.ethusd}` : `${ethPrice.ethbtc}₿`}</h2>
     }
 
     return (<div>
@@ -144,9 +144,9 @@ export const EthAndGasPrice = () => {
                     </Row>
                 </Container>
 
-                <div className='eth-price-container'>
+                <Container className='d-flex justify-content-center align-items-center mt-5'>
                     {price}
-                    <ToggleButton changeDenomination={changeDenomination} isUSD={isUSD} />
-                </div>
+                    <ToggleButton changeDenomination={changeDenomination} isUSD={isUSD}/>
+                </Container>
             </div>)
 };
