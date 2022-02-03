@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { ERC20Transfer, UniswapSwap, AddRemoveLP } from '../estimatedTxCosts/EstimatedTxCosts';
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 
-export const EthAndGasPrice = () => {
+export const GasPrice = () => {
 
     // Pings etherscan API for gas oracle.
     const getGas = async () => {
@@ -25,19 +25,14 @@ export const EthAndGasPrice = () => {
         setInterval(() => getGas(), 15000);
     }, []);
 
-    // Pings etherscan API for ETH price in USD and BTC.
+    // Pings CoinGecko API for ETH price in USD.
     const fetchETHPrice = async () => {
 
-        const response = await fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=5KF5PBYTPZ4DD21G8KUT3QAR9W7DM8SDTC`)
+        const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`)
 
         const data = await response.json();
-
-        // If call is unsuccessful, return and keep previous data displayed.
-        if (data.status !== "1") {
-            return;
-        }
         
-        setETHPrice(data.result);
+        setETHPrice(data.ethereum.usd);
         setLoading(false)
     }
 
@@ -54,24 +49,7 @@ export const EthAndGasPrice = () => {
     // Prop object to easily pass to children.
     const props = {
         gasPrice: gasPrice.ProposeGasPrice,
-        ethPrice: ethPrice.ethusd
-    }
-
-    const [isUSD, setIsUSD] = useState(true)
-
-    // Handler passed to child to allow user to switch between USD or BTC price.
-    const changeDenomination = () => {
-        setIsUSD(!isUSD);
-    }
-
-    // Empty variable to declare with if statement below.
-    let price;
-
-    // If loading is true then display "Loading..." - else display eth price.
-    if (isLoading === true) {
-        price = <h2>Loading...</h2>
-    } else {
-        price = <h2 onClick={changeDenomination}>{isUSD === true ? `$${ethPrice.ethusd}` : `${ethPrice.ethbtc}₿`}</h2>
+        ethPrice: ethPrice
     }
 
     return (<div>
@@ -82,7 +60,7 @@ export const EthAndGasPrice = () => {
                                 <Card.Header as="h2" className='bg-dark text-light'>Fast Gas</Card.Header>
                                 <Card.Body>
                                     <Card.Title>{isLoading === true ? `Loading...` : `${gasPrice.FastGasPrice} Gwei`}</Card.Title>
-                                    <Card.Text className='d-flex align-items-center justify-content-center mb-2'>
+                                    <Card.Text className='d-flex align-items-center justify-content-center mb-2' as='div'>
                                         <Spinner animation="grow" variant="success" size="sm" className='m-2 p-0'/>
                                         +3 Priority
                                     </Card.Text>
@@ -92,7 +70,7 @@ export const EthAndGasPrice = () => {
                                     <Card.Text className="text-muted mb-1">
                                         ERC20 Transfer Cost:
                                     </Card.Text>
-                                    <Card.Text>
+                                    <Card.Text as='h4'>
                                         <ERC20Transfer {...props} />
                                     </Card.Text>
                                 </Card.Footer>
@@ -104,7 +82,7 @@ export const EthAndGasPrice = () => {
                                 <Card.Header as="h2" className='bg-dark text-light'>Average Gas</Card.Header>
                                 <Card.Body>
                                     <Card.Title> {isLoading === true ? `Loading...` : `${gasPrice.ProposeGasPrice} Gwei`}</Card.Title>
-                                    <Card.Text className='d-flex align-items-center justify-content-center mb-2'>
+                                    <Card.Text className='d-flex align-items-center justify-content-center mb-2' as='div'>
                                         <Spinner animation="grow" variant="warning" size="sm" className='m-2 p-0'/>
                                         +2 Priority</Card.Text>
                                     <Card.Text>&lt;60s Confirmation Time</Card.Text>
@@ -113,7 +91,7 @@ export const EthAndGasPrice = () => {
                                     <Card.Text className="text-muted mb-1">
                                         Add or Remove LP Cost:
                                     </Card.Text>
-                                    <Card.Text>
+                                    <Card.Text as='h4'>
                                         <AddRemoveLP {...props} />
                                     </Card.Text>
                                 </Card.Footer>
@@ -125,7 +103,7 @@ export const EthAndGasPrice = () => {
                                 <Card.Header as="h2" className='bg-dark text-light'>Slow Gas</Card.Header>
                                 <Card.Body>
                                     <Card.Title>{isLoading === true ? `Loading...` : `${gasPrice.SafeGasPrice} Gwei`}</Card.Title>
-                                    <Card.Text className='d-flex align-items-center justify-content-center mb-2'>
+                                    <Card.Text className='d-flex align-items-center justify-content-center mb-2' as='div'>
                                         <Spinner animation="grow" variant="danger" size="sm" className='m-2 p-0'/>
                                         +1 Priority</Card.Text>
                                     <Card.Text>&lt;60s Confirmation Time</Card.Text>
@@ -134,17 +112,13 @@ export const EthAndGasPrice = () => {
                                     <Card.Text className="text-muted mb-1">
                                         DEX Swap Cost:
                                     </Card.Text>
-                                    <Card.Text>
+                                    <Card.Text as='h4'>
                                         <UniswapSwap {...props} />
                                     </Card.Text>
                                 </Card.Footer>
                             </Card>
                         </Col>
                     </Row>
-                </Container>
-
-                <Container className='d-flex justify-content-center align-items-center mt-5'>
-                    {price}
                 </Container>
             </div>)
 };

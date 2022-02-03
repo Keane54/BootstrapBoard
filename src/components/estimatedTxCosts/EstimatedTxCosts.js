@@ -15,7 +15,7 @@ export const ERC20Transfer = (props) => {
         setTransferCost(`$${cost.toFixed(2)}`);
     }, [gasPrice, ethPrice])
 
-    return <h4 className="mb-0">{transferCost === `$NaN` ? `Loading...` : `${transferCost}`}</h4>
+    return <p className="mb-0">{transferCost === `$NaN` ? `Loading...` : `${transferCost}`}</p>
 }
 
 export const UniswapSwap = (props) => {
@@ -33,7 +33,7 @@ export const UniswapSwap = (props) => {
         setSwapCost(`$${cost.toFixed(2)}`);
     }, [gasPrice, ethPrice])
 
-    return <h4 className="mb-0">{swapCost === `$NaN` ? `Loading...` : `${swapCost}`}</h4>
+    return <p className="mb-0">{swapCost === `$NaN` ? `Loading...` : `${swapCost}`}</p>
 }
 
 export const AddRemoveLP = (props) => {
@@ -51,5 +51,5 @@ export const AddRemoveLP = (props) => {
         setLiquidityCost(`$${cost.toFixed(2)}`);
     }, [gasPrice, ethPrice])
     
-    return <h4 className="mb-0">{liquidityCost === `$NaN` ? `Loading...` : `${liquidityCost}`}</h4>
+    return <p className="mb-0">{liquidityCost === `$NaN` ? `Loading...` : `${liquidityCost}`}</p>
 }
