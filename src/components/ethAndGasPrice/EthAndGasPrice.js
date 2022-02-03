@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { ERC20Transfer, UniswapSwap, AddRemoveLP } from '../estimatedTxCosts/EstimatedTxCosts';
-import { ToggleButton } from '../toggleButton/ToggleButton';
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 
 export const EthAndGasPrice = () => {
@@ -72,7 +71,7 @@ export const EthAndGasPrice = () => {
     if (isLoading === true) {
         price = <h2>Loading...</h2>
     } else {
-        price = <h2> ETH Price: {isUSD === true ? `$${ethPrice.ethusd}` : `${ethPrice.ethbtc}₿`}</h2>
+        price = <h2 onClick={changeDenomination}>{isUSD === true ? `$${ethPrice.ethusd}` : `${ethPrice.ethbtc}₿`}</h2>
     }
 
     return (<div>
@@ -146,7 +145,6 @@ export const EthAndGasPrice = () => {
 
                 <Container className='d-flex justify-content-center align-items-center mt-5'>
                     {price}
-                    <ToggleButton changeDenomination={changeDenomination} isUSD={isUSD}/>
                 </Container>
             </div>)
 };
