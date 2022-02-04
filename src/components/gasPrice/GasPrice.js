@@ -13,9 +13,10 @@ export const GasPrice = () => {
         // If call is unsuccessful, return and keep previous data displayed.
         if (data.status !== "1") {
             return;
-        }
+        };
                     
-        setGasPrice(data.result)
+        setGasPrice(data.result);
+        setLoading(false)
     };
 
     const [gasPrice, setGasPrice] = useState(() => getGas());
@@ -33,7 +34,6 @@ export const GasPrice = () => {
         const data = await response.json();
         
         setETHPrice(data.ethereum.usd);
-        setLoading(false)
     }
 
     const [ethPrice, setETHPrice] = useState(() => fetchETHPrice());
@@ -46,20 +46,22 @@ export const GasPrice = () => {
         }, 30000)
     }, [])
 
-    // Prop object to easily pass to children.
+    // Prop object to pass to children.
     const props = {
         gasPrice: gasPrice.ProposeGasPrice,
         ethPrice: ethPrice
     }
 
     return (<div>
-                <Container fluid>
+                <Container fluid className='mb-5'>
                     <Row>
-                        <Col xs={12} sm={4}>
+                        <Col sm={12} md={4}>
                             <Card border='dark' className='mb-4'>
                                 <Card.Header as="h2" className='bg-dark text-light'>Fast Gas</Card.Header>
                                 <Card.Body>
-                                    <Card.Title>{isLoading === true ? `Loading...` : `${gasPrice.FastGasPrice} Gwei`}</Card.Title>
+                                    <Card.Title>
+                                        {isLoading === true ? `Loading...` : `${gasPrice.FastGasPrice} Gwei`}
+                                    </Card.Title>
                                     <Card.Text className='d-flex align-items-center justify-content-center mb-2' as='div'>
                                         <Spinner animation="grow" variant="success" size="sm" className='m-2 p-0'/>
                                         +3 Priority
@@ -77,7 +79,7 @@ export const GasPrice = () => {
                             </Card>
                         </Col>
 
-                        <Col xs={12} sm={4}>
+                        <Col sm={12} md={4}>
                             <Card border='dark' className='mb-4'>
                                 <Card.Header as="h2" className='bg-dark text-light'>Average Gas</Card.Header>
                                 <Card.Body>
@@ -98,7 +100,7 @@ export const GasPrice = () => {
                             </Card>
                         </Col>
 
-                        <Col xs={12} sm={4}>
+                        <Col sm={12} md={4}>
                             <Card border='dark' className='mb-4'>
                                 <Card.Header as="h2" className='bg-dark text-light'>Slow Gas</Card.Header>
                                 <Card.Body>

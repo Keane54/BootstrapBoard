@@ -48,6 +48,7 @@ export const GetEthBalance = () => {
         <input type="submit"/>
     </form>
     
-    <h2>Address: {validAddress}</h2>
-    <h2>Balance: {ethBalance}Ξ</h2></div>)
+        <h4>Address: {validAddress}</h4>
+        <h4>Balance: {ethBalance}Ξ</h4>
+    </div>)
 }

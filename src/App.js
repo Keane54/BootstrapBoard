@@ -1,6 +1,8 @@
 import { Row, Col, Container } from "react-bootstrap";
 import { GasPrice } from "./components/gasPrice/GasPrice";
 import { EthPrice } from "./components/ethPrice/EthPrice";
+import { CurrentBlock } from "./components/currentBlock/CurrentBlock";
+import { GetEthBalance } from "./components/getETHBalance/GetETHBalance";
 
 
 function App() {
@@ -20,7 +22,16 @@ function App() {
 
       <GasPrice/>
 
-      
+      <Container fluid className="m-0">
+        <Row>
+          <Col sm={12} md={{span:4, offset:1}}>
+            <CurrentBlock />
+          </Col>
+          <Col sm={12} md={{span: 6, offset:1}}>
+            <GetEthBalance />
+          </Col>
+        </Row>
+      </Container>
       
     </div>
   );

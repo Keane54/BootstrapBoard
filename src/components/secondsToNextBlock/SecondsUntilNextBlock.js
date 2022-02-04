@@ -30,5 +30,5 @@ export const SecondsUntilNextBlock = (props) => {
 
     }, [currentBlock])
 
-    return <h1>Time since block update: {seconds}s</h1>
+    return <h4>Time since block update: {seconds}s</h4>
 }

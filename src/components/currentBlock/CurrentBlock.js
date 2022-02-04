@@ -37,7 +37,7 @@ export const CurrentBlock = () => {
     }
 
     return (<div className="current-block-container">
-        <h1>Block: {blockNum}</h1>
+        <h3>Block: {blockNum}</h3>
 
         <SecondsUntilNextBlock currentBlock={blockNum} />
         </div>)
