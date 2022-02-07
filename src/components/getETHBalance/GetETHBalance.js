@@ -42,13 +42,13 @@ export const GetEthBalance = () => {
         setAddress("")
     }
 
-    return (<div className="user-balance-container">
-        <form onSubmit={handleSubmit} >
+    return (<div>
+        <form onSubmit={handleSubmit} className="mb-3">
         <input type="text" value={address} placeholder="Enter an Ethereum Address" onChange={handleChange} />
         <input type="submit"/>
     </form>
     
-        <h4>Address: {validAddress}</h4>
+        <h4 className="mb-3">Address: {validAddress}</h4>
         <h4>Balance: {ethBalance}Ξ</h4>
     </div>)
 }
