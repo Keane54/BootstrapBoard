@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import Web3 from 'web3';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 let web3 = new Web3(Web3.givenProvider || "https://eth-mainnet.alchemyapi.io/v2/4RvGTwEA6WDJUNCq-3iCvNNtdXKh1Q8U")
 
@@ -15,7 +15,6 @@ export const GetBlockTransactions = (props) => {
 
         setTxReceipts(response);
         setLoading(false)
-        /* TODO - Change CurrentBlock component to use web3 instead of Alchemy API.*/
     };
 
     const [txReceipts, setTxReceipts] = useState("Loading...");
@@ -29,15 +28,12 @@ export const GetBlockTransactions = (props) => {
     const { transactions } = txReceipts;
 
 
-    return (<Container>
-                <ul>
+    return (<Container className='p-0 d-flex flex-column'>
                 { loading === true ? "Loading..." :  transactions.map((transaction) => {
                         return (
-                            <li>{ transaction.replace(transaction.substring(10, 56), ".....")}</li>
+                            <p key={transaction}>{ transaction.replace(transaction.substring(10, 56), ".....")}</p>
                         )
                     }
                 )}
-                </ul>
-
     </Container>)
 }
