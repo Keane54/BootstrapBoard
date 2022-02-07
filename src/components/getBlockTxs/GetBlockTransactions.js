@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import Web3 from 'web3';
 
-let web3 = new Web3(Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/4RvGTwEA6WDJUNCq-3iCvNNtdXKh1Q8U"))
+let web3 = new Web3(Web3.givenProvider || "https://eth-mainnet.alchemyapi.io/v2/4RvGTwEA6WDJUNCq-3iCvNNtdXKh1Q8U")
 
 // Uses ParityAPI to get tx receipts from blocks.
 export const GetBlockTransactions = (props) => {
@@ -10,9 +10,11 @@ export const GetBlockTransactions = (props) => {
     const getBlockReceipts = async (block) => {
         const response = await web3.eth.getBlock(block)
 
-        const data = await response.json();
+        console.log(response);
 
-        console.log(data);
+        /* TODO - Set receipts state
+        Return in JSX.
+        Change CurrentBlock component to use web3 instead of Alchemy API.*/
     }
 
     const [receipts, setReceipts] = useState("Loading...");

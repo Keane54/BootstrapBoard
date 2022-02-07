@@ -21,11 +21,9 @@ export const CurrentBlock = () => {
         const data = parseInt(dataHex.result, 16);
 
         setBlockNum(data);
-        setHexBlockNum(dataHex.result);
     }
 
     const [blockNum, setBlockNum] = useState(() => getCurrentBlock());
-    const [hexBlockNum, setHexBlockNum] = useState(null)
 
     // Pings API every second.
     useEffect(() => {
@@ -44,6 +42,6 @@ export const CurrentBlock = () => {
 
         <SecondsUntilNextBlock currentBlock={blockNum} />
 
-        <GetBlockTransactions block={hexBlockNum}/>
+        <GetBlockTransactions block={blockNum}/>
         </div>)
 }
