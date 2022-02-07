@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { SecondsUntilNextBlock } from "../secondsToNextBlock/SecondsUntilNextBlock";
 import { GetBlockTransactions } from "../getBlockTxs/GetBlockTransactions";
+import Web3 from 'web3';
+
+let web3 = new Web3(Web3.givenProvider || "https://eth-mainnet.alchemyapi.io/v2/4RvGTwEA6WDJUNCq-3iCvNNtdXKh1Q8U")
 
 export const CurrentBlock = () => {
 
     // Fetches current blocknumber from Alchemy API.
     const getCurrentBlock = async () => {
 
-        const response = await fetch(`https://eth-mainnet.alchemyapi.io/v2/4RvGTwEA6WDJUNCq-3iCvNNtdXKh1Q8U`, {
-            method: "POST",
-            body: JSON.stringify({"jsonrpc":"2.0",
-            "method":"eth_blockNumber",
-            "params":[],
-            "id":0})
-        });
+        const block = await web3.eth.getBlockNumber();
 
-        const dataHex = await response.json();
-
-        // Convert data from hexadecimal to integer.
-        const data = parseInt(dataHex.result, 16);
-
-        setBlockNum(data);
+        setBlockNum(block)
     }
 
     const [blockNum, setBlockNum] = useState(() => getCurrentBlock());

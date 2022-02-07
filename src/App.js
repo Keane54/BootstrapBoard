@@ -24,15 +24,14 @@ function App() {
 
       <Container fluid className="m-0">
         <Row>
-          <Col sm={12} md={{span:4, offset:1}}>
+          <Col sm={12} md={7}>
             <CurrentBlock />
           </Col>
-          <Col sm={12} md={{span: 6, offset:1}}>
+          <Col sm={12} md={{span: 3, offset:1}}>
             <GetEthBalance />
           </Col>
         </Row>
       </Container>
-      
     </div>
   );
 }
