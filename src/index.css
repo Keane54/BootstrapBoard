@@ -21,3 +21,7 @@ code {
   margin-bottom: 0;
   color: whitesmoke;
 }
+
+iframe {
+  pointer-events: none;
+}

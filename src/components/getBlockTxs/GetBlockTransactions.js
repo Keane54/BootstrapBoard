@@ -11,27 +11,28 @@ export const GetBlockTransactions = (props) => {
     const getBlockReceipts = async (block) => {
         const response = await web3.eth.getBlock(block)
 
-        console.log(response);
+        const responseHashes = response.transactions.slice(0, 15) 
 
-        setTxReceipts(response);
+        setHashes(responseHashes);
+        setTxReceipts(response.transactions.length)
         setLoading(false)
     };
 
-    const [txReceipts, setTxReceipts] = useState("Loading...");
+    const [hashes, setHashes] = useState([])
+    const [txReceipts, setTxReceipts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getBlockReceipts(block);
     }, [block]);
 
-    // Destructure state.
-    const { transactions } = txReceipts;
-
-
-    return (<Container className='p-0 d-flex flex-column'>
-                { loading === true ? "Loading..." :  transactions.map((transaction) => {
+    return (<Container className='p-0 d-flex flex-column align-items-center'>
+            <h4>Transactions in Block: {txReceipts}</h4>
+            <h5>Transaction Sample:</h5>
+                { loading === true ? "Loading..." :  hashes.map((transaction) => {
+                    const etherscanLink = `https://etherscan.io/tx/${transaction}`
                         return (
-                            <p key={transaction}>{ transaction.replace(transaction.substring(10, 56), ".....")}</p>
+                            <a className='w-50 text-center' target='_blank' href={etherscanLink} key={transaction} rel="noreferrer">{ transaction.replace(transaction.substring(10, 56), ".....")}</a>
                         )
                     }
                 )}
