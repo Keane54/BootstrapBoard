@@ -25,3 +25,14 @@ code {
 iframe {
   pointer-events: none;
 }
+
+.etherscan-logo {
+  padding-bottom: 0.175rem;
+  margin-left: 0.2rem;
+  max-height: 1.75rem;
+  transition: ease-in-out 150ms opacity;
+}
+
+.etherscan-logo:hover {
+  opacity: 0.65;
+}

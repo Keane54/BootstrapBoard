@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const SecondsUntilNextBlock = (props) => {
+export const SecondsSinceLastBlock = (props) => {
 
     // Gets passed current block from parent component.
     const { currentBlock } = props;
@@ -30,5 +30,5 @@ export const SecondsUntilNextBlock = (props) => {
 
     }, [currentBlock])
 
-    return <h4>Time since block update: {seconds}s</h4>
+    return <h4>Time since previous block: {seconds}s</h4>
 }

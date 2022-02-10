@@ -27,7 +27,7 @@ export const GetBlockTransactions = (props) => {
     }, [block]);
 
     return (<Container className='p-0 d-flex flex-column align-items-center'>
-            <h4>Transactions in Block: {txReceipts}</h4>
+            <h4 className='mb-3'>Transactions in Block: {txReceipts}</h4>
             <h5>Transaction Sample:</h5>
                 { loading === true ? "Loading..." :  hashes.map((transaction) => {
                     const etherscanLink = `https://etherscan.io/tx/${transaction}`

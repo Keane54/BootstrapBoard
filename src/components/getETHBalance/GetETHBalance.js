@@ -4,8 +4,9 @@ export const GetEthBalance = () => {
 
     // Sets initial eth balance to 0.
     const [ethBalance, setEthBalance] = useState("0");
-    const [address, setAddress] = useState("")
+    const [address, setAddress] = useState("");
     const [validAddress, setValidAddress] = useState("Enter an Ethereum address.");
+    const [isValid, setIsValid] = useState(false);
 
     const getEthereumBalance = async () => {
 
@@ -19,6 +20,7 @@ export const GetEthBalance = () => {
 
             setEthBalance("0");
             setValidAddress("Invalid Address Format");
+            setIsValid(false)
 
             return;
         };
@@ -28,6 +30,7 @@ export const GetEthBalance = () => {
         
        setEthBalance(balance);
        setValidAddress(address);
+       setIsValid(true)
     }
 
     // Handle typed text changing.
@@ -48,7 +51,7 @@ export const GetEthBalance = () => {
         <input type="submit"/>
     </form>
     
-        <h4 className="mb-3">Address: {validAddress}</h4>
+        <h4 className="mb-3">Address: {isValid === true ? validAddress.replace(validAddress.substring(8, 34), "...") : validAddress}</h4>
         <h4>Balance: {ethBalance}Ξ</h4>
     </div>)
 }
